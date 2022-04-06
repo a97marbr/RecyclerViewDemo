@@ -45,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.mountain_recycler_view);
         MountainAdapter mountainAdapter = new MountainAdapter(getApplicationContext(),mountainArrayList);
-        recyclerView.setAdapter(mountainAdapter);
+        SimpleMountainAdapter simpleMountainAdapter = new SimpleMountainAdapter(getApplicationContext(),mountainArrayList);
+
+        //recyclerView.setAdapter(mountainAdapter);
+        recyclerView.setAdapter(simpleMountainAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 
