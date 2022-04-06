@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,10 +24,20 @@ public class MainActivity extends AppCompatActivity {
 
         String json = loadJSONFromAsset(getApplicationContext());
         Log.d("==>","DATA:'" + json + "'");
+
+        // Parse json
         Gson gson = new Gson();
+
+        // ... as array
         Mountain[] mountains = gson.fromJson(json, Mountain[].class);
         Log.d("==>","Size:"+mountains.length);
         Log.d("==>",mountains[0].toString());
+
+        // ... as ArrayList
+        Type mountainListType = new TypeToken<ArrayList<Mountain>>(){}.getType();
+        ArrayList<Mountain> mountainArrayList = gson.fromJson(json, mountainListType);
+        Log.d("==>","Size:"+mountainArrayList.size());
+        Log.d("==>",mountainArrayList.get(0).toString());
     }
 
     public String loadJSONFromAsset(Context context) {
