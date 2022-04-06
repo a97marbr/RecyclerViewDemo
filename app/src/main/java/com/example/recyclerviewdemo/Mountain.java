@@ -1,5 +1,7 @@
 package com.example.recyclerviewdemo;
 
+import androidx.annotation.NonNull;
+
 public class Mountain {
         /*
         {
@@ -36,6 +38,12 @@ public class Mountain {
         this.size = size;
         this.cost = cost;
         this.auxdata = auxdata;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name + " is located at " + location + " and is " + size + "m above sea level.";
     }
 
     public String getID() {

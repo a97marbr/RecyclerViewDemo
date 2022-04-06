@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Mountain[] mountains = gson.fromJson(json, Mountain[].class);
         Log.d("==>","Size:"+mountains.length);
+        Log.d("==>",mountains[0].toString());
     }
 
     public String loadJSONFromAsset(Context context) {
