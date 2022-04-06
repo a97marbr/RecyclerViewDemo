@@ -1,6 +1,8 @@
 package com.example.recyclerviewdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +35,18 @@ public class MainActivity extends AppCompatActivity {
         // ... as array
         Mountain[] mountains = gson.fromJson(json, Mountain[].class);
         Log.d("==>","Size:"+mountains.length);
-        Log.d("==>",mountains[0].toString());
+        Log.d("==>","Item 0"+mountains[0].toString());
 
         // ... as ArrayList
         Type mountainListType = new TypeToken<ArrayList<Mountain>>(){}.getType();
         ArrayList<Mountain> mountainArrayList = gson.fromJson(json, mountainListType);
         Log.d("==>","Size:"+mountainArrayList.size());
-        Log.d("==>",mountainArrayList.get(0).toString());
+        Log.d("==>","Item 0:" + mountainArrayList.get(0).toString());
+
+        recyclerView = findViewById(R.id.mountain_recycler_view);
+        MountainAdapter mountainAdapter = new MountainAdapter(getApplicationContext(),mountainArrayList);
+        recyclerView.setAdapter(mountainAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 
     public String loadJSONFromAsset(Context context) {
