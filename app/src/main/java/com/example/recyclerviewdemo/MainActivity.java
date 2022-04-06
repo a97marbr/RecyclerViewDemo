@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
         String json = loadJSONFromAsset(getApplicationContext());
         Log.d("==>","DATA:'" + json + "'");
+        Gson gson = new Gson();
+        Mountain[] mountains = gson.fromJson(json, Mountain[].class);
+        Log.d("==>","Size:"+mountains.length);
     }
 
     public String loadJSONFromAsset(Context context) {
